@@ -1,18 +1,40 @@
 
+
+
 const http = require('http');
-
-const PORT = 3000;
-
+const PORT = process.env.PORT || 3000; // Render sets process.env.PORT automatically!
 
 const server = http.createServer((req, res) => {
 
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    if (req.url === '/' || req.url === '/home') {
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.end('<h1>Welcome to my Node.js Homepage!</h1><p>This is dynamic HTML content.</p>');
+    } 
     
 
-    res.end('Hello, World! Your Node.js server is working.');
+    else if (req.url === '/about') {
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.end('<h1>About Page</h1><p>I built this server completely from scratch!</p>');
+    } 
+    
+  
+    else if (req.url === '/api/user') {
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        const userData = {
+            username: "developer_pro",
+            status: "active",
+            skills: ["Node.js", "Git", "JavaScript"]
+        };
+        res.end(JSON.stringify(userData));
+    } 
+    
+    
+    else {
+        res.writeHead(404, { 'Content-Type': 'text/html' });
+        res.end('<h1>404 Page Not Found</h1><p>Oops! That page doesn\'t exist.</p>');
+    }
 });
 
-
 server.listen(PORT, () => {
-    console.log(`Server is running at http://localhost:${PORT}/`);
+    console.log(`Server is running on port ${PORT}`);
 });
