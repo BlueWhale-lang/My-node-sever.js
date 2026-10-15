@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Intake Form</title>
+</head>
+<body>
+
+    <h2>🎓 Enter Student Name</h2>
+    
+    <!-- This form sends a POST request to our Node.js server -->
+    <form action="/submit-student" method="POST">
+        <label>Student Name:</label>
+        <input type="text" name="studentName" placeholder="Type name here..." required>
+        <button type="submit">Submit</button>
+    </form>
+
+</body>
+</html>
